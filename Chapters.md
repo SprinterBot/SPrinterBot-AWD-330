@@ -1,3 +1,4 @@
+
 #Chapter 1
 Thoughts, Planning, possibilities, reasearch.
 
