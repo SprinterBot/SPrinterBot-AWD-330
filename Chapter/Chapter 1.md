@@ -1,6 +1,9 @@
 # Chapter 1
-**Introduction**
-[Meeting goals, future projects, Ideas.]
+## Introduction
+
+**[Meeting goals, future projects, Ideas.]**
+
+
 
 Final project idea. (One note simple sketches) Gives an overall idea of the project. I will go more deeply in future chapters.
 ![image](https://github.com/studdev101/Quality-Speed-Printing-DIY-SERVOS-/assets/101147725/0bff0d91-4913-4a3b-9a9c-68676ec6b92b)
