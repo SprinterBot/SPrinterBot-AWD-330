@@ -19,9 +19,10 @@ Motor (coil)
 The optical encoder requires two things: a strip - a long clear plastic strip with very dark lines spaced in micrometers, and an encoder - a plastic piece U-shaped between one of the halves that has infrared LED and the other half has two sensors that are spaced the way that they will give of two signals one shifted 90 degrees to another, (explained later). When the plastic strip moves between two halves relatively to the encoder (could be reverse, encoder moves) those dark lines are close and open the way for infrared light to reach each of the sensors on the opposite side. When there is a dark line sensor will give you 0, when there is a gap (clear space between lines) sensor will give you 1, if you graph it you will get a square wave, the faster you move the strip the thinner these squares be. For reference look at the picture below, a similar system, the circular encoder with gaps, infrared LED, and two sensors, each giving a square wave signal, you can see that the signal from one sensor is shifted 90 degrees relative to the signal from another sensor. This is important, you need two sensors to be able to identify the direction of the motor signals that will shift 90 degrees one way or another based on the direction of the strip movement.
 > [!NOTE]
 > 0 and 1 can be anything based on the type of the sensor, for example, an optical sensor from printing paper printers, the optical sensor will give you 0 or 3 volts based position of the strip.
-![HEDS-9701-E50](https://github.com/studdev101/Quality-Speed-Printing-DIY-SERVOS-/assets/101147725/28544202-92c1-4b70-86b4-051d1f4af333)
+
+> [!NOTE]
+> Any driver controller should be fast enough to be able to "see" and respond quickly to the signal from the encoder. Imagine a 25 micron strip, at speed of 1m/s, 40000 thousand lines per sec
 
 ![Untitled](https://github.com/studdev101/Quality-Speed-Printing-DIY-SERVOS-/assets/101147725/02a652e7-dcd0-4820-95ca-9e2b80e15df0)
 
-> [!NOTE]
-> Any driver controller should be fast enough to be able to "see" and respond quickly to the signal from the encoder. Imagine a 25microns strip, a speed of 1m/s, 25000 thousand lines per sec
+![HEDS-9701-E50](https://github.com/studdev101/Quality-Speed-Printing-DIY-SERVOS-/assets/101147725/28544202-92c1-4b70-86b4-051d1f4af333)
