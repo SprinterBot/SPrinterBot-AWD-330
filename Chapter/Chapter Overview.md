@@ -7,4 +7,4 @@ Thoughts, Planning, possibilities, research.
 Playing with PID control and optical encoder RPI pico
 
 ## Chapter 2 
-Mini motor two magnet plates between which coil slider.
+Building first DIY servo, Mini motor two magnet plates between which coil slider.
