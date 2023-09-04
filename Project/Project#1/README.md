@@ -43,3 +43,12 @@ portion is called flux) ...we get a rotational force, one side of the coil is pu
 
 We built the first DC linear motor and it is not required to have brushes so basically DC brushless motor.
 
+Also at last, when building a DC motor there several things to consider. The max amps, mass, voltage, magnets, number of poles.
+More ups you want to draw thicker you want coil copper wire to be or increase the number of poles, more voltage more loops but increasingly more heat will be dispatched, less amps, I don't know how yet but less inductance the better. 
+ 
+### Encoder (2/10)
+
+The encoder my the most crucial thing in the servo, it is the encoder that turns any motor into a servo motor. The encoder enables the driver controller to know its current position and speed. There are two types of encoders absolute, and relative. Basically, the absolute encoder can find its position at any time even if you pored down and power up your driver controller; while the relative position encoder can only tell you the relative position like, you made a homing sequence on your 3D printer and from this point it can tell you relatively to the zero where its location, like correlation coficient how far from the given point. 
+
+In my project I will be using the optical encoder, there are many other encoders like laser alternatives and magnetic potentiometers, but some of them are too expensive, others are not reliable, and the rest are unimaginable. An optical encoder can provide great precision without being expensive, it can be as simple as a plastic strip with dark lines and two light sensors.
+
