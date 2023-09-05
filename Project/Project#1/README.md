@@ -61,3 +61,19 @@ Basically, PWM is defined as Puls-Width-Modulation, if any of you played with pi
 
 ### H-Bridge (4/10)
 
+Basically, 4 transistors are positioned in a specific way that when two of them switch on the motor speen one way other transistors turn on the motor another way. This is the simplest form of this circuit. H-Bridge can be either used as one for the DC motor or it can also control the speed of the motor with PWM that comes from the main controller.
+![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/255eecd8-d82f-45b3-a428-7c39a204d528)
+
+### Open loop control (no feedback) (5/10)
+
+Open loop control is where no feedback control implemented, like
+
+### Example of Open loop control (6/10)
+
+### Closed loop control (feedback) (7/10)
+
+In this system for example temperature control. We have a heater cartridge that heats up the hotend, and we have a thermometer that gives its resistance data to the controller based on which the controller can calculate the actual temperature of the hotend and compare it to the requested temperature and correct the setting. But it is not easy just to fix, the controller needs to know how to fix, it for accurate and fast response Closed loop control usually implements P, PI, PD, or PID control. (Later on this)
+
+### Servo Motor
+
+There you go in theory we built a simple model of a servo motor, we got DC motor that is being controlled by H-bridge, and we have encoder that will give us the feedback
