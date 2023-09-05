@@ -54,9 +54,10 @@ In my project I will be using the optical encoder, there are many other encoders
 
 The encoder will work like an on/off switch every time a dark line passes in between the sensors, they will give 0 value in other situations 1, thus creating a square wave which can later be compared with the step wave from the controller board. (Later on this). The sensor block usually has two sensors with a small gap in between that helps it identify the direction of the motor, by comparing the signal from one sensor to another. 
 
-### PWM
+### PWM (3/10)
 
-Basically, PWM is defined as Puls-Width-Modulation, if any of you played with a pin on Raspberry Pi or played with Arduino you know that PWM is a signal that varies in signal widths, this signal can be used to control motors in our situation. We can control the speed of the motor by varying the signal width which is a square wave. Based on how long
+Basically, PWM is defined as Puls-Width-Modulation, if any of you played with pins on Raspberry Pi or played with Arduino you know that PWM is a signal that varies in signal widths, this signal can be used to control motors in our situation. We can control the speed of the motor by varying the signal width which is a square wave. If on 100% duty cycle we have a voltage of 5v then at 50% we have a voltage of 2.5. But PWM is generated directly from the controller that can't provide high enough current and voltage, in order to do that we need a transistor that will work like a switch for higher voltage and current; usually, it is a MOSFET transistor because mosfet is being controller by voltage while BJT transistor controlled by the current into the collector. That is why current amplifiers are made of BJTs and voltage amplifiers are made of MOSFETs. One transistor will be able to control the speed of the motor but only in one direction, that is why we need a H-bridge.
+![Pulse-Width-Modulation](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/a90e9b6f-9b72-450b-b77b-ce823ae5dca0)
 
-
+### H-Bridge (4/10)
 
