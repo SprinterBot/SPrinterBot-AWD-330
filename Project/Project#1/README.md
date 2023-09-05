@@ -32,7 +32,7 @@ DC motor is one of the important things in servo motor, it converts electrical e
 
 In the first image, you can see the basic concept of a DC motor coil has a direct current flowing through it creating an electromagnetic field thus resulting in a directional force after all making the rotor spin. As you may know now magnetic field of a coil will have two poles based on the direction of the current flowing through it. In (image #4), the Right-hand rule can help us find the direction of the force in this situation, so the thumb stands for the direction of force, index direction of the current, and middle direction of the magnetic field (Magnetic field goes from the north pole to south pole). So in (image #1) the current flows clockwise over the could, and the magnetic field goes from the N magnet to the S Pole magnet, the right-hand rule tells us that in this situation  force will be directed downward where the N magnet and upward where is S magnet, creating a rotational force thus rotating the stator and anything that is connected...? But wait what if poles of the magnet match the poles of the coil? Your motor will be stalled and short-circuited (later on this). But this has been solved, (Image #1) just shows one pole while the actual, DC motor usually has 3 or more poles. Look at (Image #2). In (image #3) this is part of the motor called the rotor-it spins, it has 3 pole poles, and each of these poles has shared contacts-pads on the commutator where brushes from GND and Power+ contact it. When brushes touch two of the pads electrical current starts to flow through one of three poles thus as we've already learned, a rotational force moves the stator, but when the rotor moves more than 1/3 of a turn this pole loses contact with brushes and a new pole takes its place thus making another 1/3 of a turn, afterward losing contact as previous pole did and being replaced with our last 3rd pole which completes its turn and succeeding losses contact and new poles takes its place. The motor has completed the first cycle. This type of motor can spin forever until the brushes get all used up or lose power. This is the simplest DC brushed motor. 
 
-This is by far one of the simplest examples, DC motor seems to be simple but it is far more complex, the interaction of the magnetic field with an electromagnetic field, the position of windings, type of coil, thickness, resistance, inductance, magnets, back EMF, friction, temperature, and many other things have crucial effect on the motor performance. Also as I understand back EMF is the generated voltage like in the generator that counters the voltage that is getting to the coil to power the motor. That's why when the motor is stalled by for example holding you and of the shart and preventing it from spinning, there will be no Back EMF and thus creating a short circuit that will eventually overheat the coils and destroy its insulation-ending up with a broken motor. (Correct me if I'm wrong.)
+This is by far one of the simplest examples, DC motor seems to be simple but it is far more complex, the interaction of the magnetic field with an electromagnetic field, the position of windings, type of coil, thickness, resistance, inductance, magnets, back EMF, friction, temperature, and many other things have crucial effect on the motor performance. 
 
 But let's get back on track, we now understand what right-hand rule and I think the left-hand rule too, two magnets on the side with different poles and coil with the flow of current that is perpendicular to the magnetic flux (now I must introduce you to new word flux, it means that only portion of the magnetic field of whole magnet interacts with electromagnetic filed of coil, this 
 portion is called flux) ...we get a rotational force, one side of the coil is pulled downward another upward. In Theory think about this, as your first problem to solve using materials that you just have learned or maybe know. What if we leave this system the same as before but we will make the South Pole of both magnets face the coil, what will be the direction of the force?
@@ -66,14 +66,33 @@ Basically, 4 transistors are positioned in a specific way that when two of them 
 
 ### Open loop control (no feedback) (5/10)
 
-Open loop control is where no feedback control implemented, like
+Open loop control is where no feedback control is implemented, like an RC plane or RC car, when you move one of your controls jousticks it  increases the RPM of your motor without knowing its actual speed or position. We are using same System in 3D printing, laser cutting, simtimes even on CNC, but companies are usualy using servos.
+
+![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/9681fdd2-a6ee-497b-afe1-fde81e056963)
+
 
 ### Example of Open loop control (6/10)
+ Steppper motors control does not reaquire feedback, and most of 3D printing systems do not implement closed loop control. Stepper motors are made in specific way that one rotor turn is devided into small percise steps. When controller requests motor to move spesific number of steprs stepper motor moves percisly this number of steps.
+
+ ![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/a24d762d-090a-436a-bd9a-d3a134a2f040)
+
+
 
 ### Closed loop control (feedback) (7/10)
 
 In this system for example temperature control. We have a heater cartridge that heats up the hotend, and we have a thermometer that gives its resistance data to the controller based on which the controller can calculate the actual temperature of the hotend and compare it to the requested temperature and correct the setting. But it is not easy just to fix, the controller needs to know how to fix, it for accurate and fast response Closed loop control usually implements P, PI, PD, or PID control. (Later on this)
+![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/567c294a-b6f3-4f82-925c-d04a2bba6f44)
 
-### Servo Motor
+### PID Loop Control (8/10)
 
-There you go in theory we built a simple model of a servo motor, we got DC motor that is being controlled by H-bridge, and we have encoder that will give us the feedback
+PID the heart of controlling the servo motor, usualy is some sort of software that does calculation based on the given constans and error signal it will give a out as correction to keep for example motor from moving but stay at cetain position, PID can also be used for position loop and velocity loop, including current loop.
+
+![uploads_0930a783-171c-4a58-8b8c-e39dbb645bac_ts1](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/9191c060-36bd-4bfb-afa6-5b6577d9d9cc)
+
+![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/53478184-6559-47a0-8a57-577cf93f460d)
+
+
+
+### Servo Motor (9/10)
+
+There you go in theory we built a simple model of a servo motor, we got a DC motor that is being controlled by H-bridge, and we have an encoder that will give us the feedback
