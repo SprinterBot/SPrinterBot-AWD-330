@@ -66,13 +66,13 @@ Basically, 4 transistors are positioned in a specific way that when two of them 
 
 ### Open loop control (no feedback) (5/10)
 
-Open loop control is where no feedback control is implemented, like an RC plane or RC car, when you move one of your controls jousticks it  increases the RPM of your motor without knowing its actual speed or position. We are using same System in 3D printing, laser cutting, simtimes even on CNC, but companies are usualy using servos.
+Open loop control is where no feedback control is implemented, like an RC plane or RC car, when you move one of your control joysticks it  increases the RPM of your motor without knowing its actual speed or position. We are using the same System in 3D printing, laser cutting, and sometimes even CNC, but companies are usually using servos.
 
 ![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/9681fdd2-a6ee-497b-afe1-fde81e056963)
 
 
 ### Example of Open loop control (6/10)
- Steppper motors control does not reaquire feedback, and most of 3D printing systems do not implement closed loop control. Stepper motors are made in specific way that one rotor turn is devided into small percise steps. When controller requests motor to move spesific number of steprs stepper motor moves percisly this number of steps.
+ Stepper motor control does not require feedback, and most of 3D printing systems do not implement closed-loop control. Stepper motors are made in a specific way that one rotor turn is divided into small precise steps. When the controller requests the motor to move a specific number of steps stepper motor moves precisely this number of steps.
 
  ![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/a24d762d-090a-436a-bd9a-d3a134a2f040)
 
@@ -85,14 +85,23 @@ In this system for example temperature control. We have a heater cartridge that 
 
 ### PID Loop Control (8/10)
 
-PID the heart of controlling the servo motor, usualy is some sort of software that does calculation based on the given constans and error signal it will give a out as correction to keep for example motor from moving but stay at cetain position, PID can also be used for position loop and velocity loop, including current loop.
+PID is the heart of controlling the servo motor, It is some sort of software that does calculation based on the given constraints and error signal it will give a out as correction to keep for example motor from moving but staying at a certain position, PID can also be used for position loop and velocity loop, including current loop. I won't go over PID control in detail as we going to use the PID library, and how PID works is a completely different project, if you are interested there are many articles that go into detail about how PID works. I can go over it just covering basics and explaining important points. But, it does not mean I won't do it, I will go over it when we concentrate on specifically on the control of the motor next project page. But for now, remember PID is made out of 3 components. Proportional, Integral, Derivative. I won't be the best at explaining it so here are a couple of links you can use to find more about this (Recommended), I will update if I get more knowledge of this.
+**Start with this:** https://www.vdwalle.com/Norte/Servo_tuning_tutorial.pdf **and**https://www.youtube.com/watch?v=JFTJ2SS4xyA
+#1: https://www.parkermotion.com/manuals/6270/6270_3.pdf
+#2:http://manuals.chudov.com/Servo-Tuning/Tuning-Servomotors.pdf
+#3:https://www.electronicdesign.com/markets/automation/article/21261678/neuronicworks-positioning-a-linear-servo-motor-with-a-pid-controller
 
 ![uploads_0930a783-171c-4a58-8b8c-e39dbb645bac_ts1](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/9191c060-36bd-4bfb-afa6-5b6577d9d9cc)
 
 ![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/53478184-6559-47a0-8a57-577cf93f460d)
 
+### PID Tuning (9/10)
+
+This is a short section. This is one of the crucial things in servo control because without it the servo will be impossible to "control," when tuning PID you find values, and gains for each component of PID control, it is possible to find it using **auto PID tune** or manually, usually when servo motors are tuned professionally, they use auto PID tune and then fine-tuned to specific needs.
 
 
-### Servo Motor (9/10)
 
-There you go in theory we built a simple model of a servo motor, we got a DC motor that is being controlled by H-bridge, and we have an encoder that will give us the feedback
+### Servo Motor (10/10)
+
+There you go in theory we built a simple model of a servo motor, we got a DC motor that is being controlled by an H-bridge, and we have an encoder that will give us feedback, we got a controller with PID control that will control the DC motor. But to be able to build on our own in real-world 'real' servo we have to go over each of this things and understand them. But before we do this it is a good idea to begin with experiments and prototypes.
+In the next section, we are going to use a simple DC motor with an optical encoder, h-bridge, and controller, the goal is to make a working servo motor from these things, and that is a challenge, and those who are in DIY printer building and printing world like challenges >:>.
