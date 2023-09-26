@@ -245,7 +245,7 @@ A_set = digitalRead(encoderPinB) == HIGH;
 ```
 -
 -
-Here this line identifies the direction of the motor, look closely at the picture. Question: When A_set is true, (sensorA signal is high) and B_set is true what is the direction, look at the picture above, particularly in this picture what is the direction of the encoder relative to the encoder strip?
+Here this line identifies the direction of the motor, look closely at the picture. Question: When A_set is true, (encoderA signal is high) and B_set is true what is the direction, look at the picture above, particularly in this picture what is the direction of the encoder relative to the encoder strip?
 In this line (this is important) **from sensorA perspective, called by encoderA signal interrupt**, when A_set is not equal to B_set +1 to the encoder position that's why encoder_pos is '+=' but when A_set is equal to B_set we will subtract 1 from encoder_pos, therefore we can count steps based on the direction.
 ```cpp
 encoder_pos += (A_set != B_set) ? +1 : -1;
@@ -257,6 +257,21 @@ Why? What Happened? Hint: refer to the picture above again, but do now look from
 ```cpp
  B_set = digitalRead(encoderPinB) == HIGH;// B    ___|````|__       ___|````|____|````  
   encoder_pos += (B_set == A_set) ? +1 : -1;//      |````|____|            |````|____|
+```
+-
+-
+-
+I should include that I made some changes to this code, I wanted to control the REF Position too so I connected the potentiometer and mapped its output as steps so I could control the motor position with a screwdriver.
+```cpp
+#define REF_PSignal_IN 28 ///new pin defined for potent
+//
+int potent_value; //new variable to freshly converted value from analog signal.
+//
+ pinMode(REF_PSignal_IN, INPUT); //setting up the pinmode
+//
+  potent_value = analogRead(REF_PSignal_IN);
+
+  REF_position = map(potent_value, 0, 1023, 10000, -10000); //mapping converted value from fresh digital value to my steps, so 10000 on potent, zero in steps, 1023 on potent, -10000 in steps
 ```
 -
 -
