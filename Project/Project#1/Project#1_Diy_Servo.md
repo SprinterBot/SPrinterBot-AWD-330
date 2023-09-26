@@ -13,7 +13,7 @@
 -H-bridge
 -hot glue gun (you don't want stuff to be flying around)
 
-### Code
+## Code
 
 Before I start I though it is good idea to go over the system of optical encoder, it is really inportant because you can control the accuracy of oprtical encoder, whole code is based on this.
 Here is the sketch of basic function of step signal comming from optical qudrature encoder.
@@ -21,7 +21,9 @@ Here is the sketch of basic function of step signal comming from optical qudratu
 ![image](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/08d2e32b-96eb-4e2d-8207-62ba59397c69)
 Let's say that we will tell our controller to count (late I will talk about defining the derection) the pulses from the encoder signal. We have 4 wires from the encoder, ground, power (my encoder can do 5v max input but controller can only work with 3.3 input voltage othewise I will burn it), and two signal wires, they will carry signal to controller.
 
-
+.
+.
+.
 Sorry this is my early code and I did not include many comments but I will go over it and my results. (scroll down for explnation)
 
 ```cpp
@@ -121,24 +123,57 @@ void Counter_triggerB()
 }
 
 ```
-
-
-
-
-  I started the code with defineing the pins
-  I should include that my h-bridge has two inputs, when both inputs are HIGH or LOW, bridge does nothing, but if one of the input is HIGH and another one is LOW, motor is spins one way, change pins, the first one is now LOW and another one is now HIGH motor spins another way. For those who had not yet tasted the programing, HIGH means controller out put is high means its pin right now it giver max out put voltage, usualy 3.3v, for some controler it is 5v, HIGH and LOW can also be defines as 1 and 0.
+.
+.
+.
+I started the code with defineing the pins
+I should include that my h-bridge has two inputs, when both inputs are HIGH or LOW, bridge does nothing, but if one of the input is HIGH and another one is LOW, motor is spins one way, change pins, the first one is now LOW and another one is now HIGH motor spins another way. For those who had not yet tasted the programing, HIGH means controller out put is high means its pin right now it giver max out put voltage, usualy 3.3v, for some controler it is 5v, HIGH and LOW can also be defines as 1 and 0.
   ```cpp
 #define encoderPinA 15 //encoderA pin, (remeber our encoder is made out of two sensors)
 #define encoderPinB 14 //encoderB pin
 #define motorPinA 8 //my h bridge pin1
 #define motorPinB 9 //my h bridge pin2
 ```
-
-
-
+.
+.
+.
 These variables will hold value, boolean (true, or, false), C++ likes to declare global varibles at first so I have to tell C++ that this are my variables and they are going to hold booleans, basicaly this is simple declareation, in decleration line you can also add valeu to the variable.
 ```cpp
 boolean A_set = false; //This boolean with tell me if current signal that is coming from encoder A is high or low, in later fucntion we will assighn value to A_set varible, true-if sensor  signalA is high, false if not
 boolean B_set = false; //Same thing here but for diffrent sensor on the encoder
 ```
+.
+.
+.
+Here we declare more variables, variable for encoder posistion, this variable will hold the posistion in steps from 0, so if you start moving the encoder it will start counting steps therfore we get a releative positiong, another varible called old_encoder_pos is just extra varible that will be used to update the serail output, later on this. Last one is important one, this varible will store the number stepp number the should be compared to step number of encoder varible and motor should move to position where live encoder posisition is equale to requested by user REF_posistion.
+```cpp
+volatile int old_encoder_pos = 0; // old encoder position, will be used to creat "new" encoder position
+volatile int encoder_pos = 0; //"current" encoder position
+volatile int REF_position = 10000;
+```
+.
+.
+.
+Our first loop, from arduin IDE, this is called void setup loop, this loop is only run once at start, you can put anything there but it will be run only once. Usualy it is used to declare pin function like tell arduino or anyother controler if this pin is input or output?
 
+This is more interesting, this is special function that will interrupt any controller proccese when it see the change on specified pins, so if you having a fast moving encoder and you don't want counter function to miss the step and have inaccurate posistiong this function is very usufl, basicaly this line is activated when on specified pin it see change in signal,(falling + rising = change) this means than for each black line on the encoder you get two step signals!! you get twice as many steps from encoder and it seems to be, more accurate stepping.
+```cpp
+void setup() {
+  pinMode(encoderPinA, INPUT); //define these pins as inputs
+  pinMode(encoderPinB, INPUT); //same
+  pinMode(motorPinA, OUTPUT); //motor pin, it will turn on the h-bridge
+  pinMode(motorPinB, OUTPUT); //same but for pinB
+
+
+  attachInterrupt(digitalPinToInterrupt(encoderPinA), Counter_triggerA, CHANGE); //InterruptA, for one pin of encoder
+
+  attachInterrupt(digitalPinToInterrupt(encoderPinB), Counter_triggerB, CHANGE); //InterruptB, for another pin of encoder
+
+  Serial.begin(9600); //tells serial to begin, procedure to get to using the serial
+  
+
+}
+```
+.
+.
+.
