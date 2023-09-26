@@ -22,7 +22,7 @@ Here is the sketch of basic function of step signal comming from optical qudratu
 Let's say that we will tell our controller to count (late I will talk about defining the derection) the pulses from the encoder signal. We have 4 wires from the encoder, ground, power (my encoder can do 5v max input but controller can only work with 3.3 input voltage othewise I will burn it), and two signal wires, they will carry signal to controller.
 
 
-Sorry this is my early code and I did not include the comment but I will go over it and my results. (scroll down for explnation)
+Sorry this is my early code and I did not include many comments but I will go over it and my results. (scroll down for explnation)
 
 ```cpp
 
@@ -32,9 +32,9 @@ Defining pins, to be used as outputs or inputs
 
 #define encoderPinA 15
 #define encoderPinB 14
-#define motorPinA 8
-#define motorPinB 9
-#define REF_PSignal_IN 28
+#define motorPinA 10
+#define motorPinB 11
+
 
 
 boolean A_set = false;
@@ -47,8 +47,8 @@ Defining variables to be used
 
 volatile int old_encoder_pos = 0; // old encoder position, will be used to creat "new" encoder position
 volatile int encoder_pos = 0; //"current" encoder position
-volatile int REF_position;
-int potent_value;
+volatile int REF_position = 10000;
+
 
 
 
@@ -58,7 +58,7 @@ void setup() {
   pinMode(encoderPinB, INPUT); //same
   pinMode(motorPinA, OUTPUT); //motor pin
   pinMode(motorPinB, OUTPUT); //motor pin
-  pinMode(REF_PSignal_IN, INPUT);
+
 
   attachInterrupt(digitalPinToInterrupt(encoderPinA), Counter_triggerA, CHANGE);
   attachInterrupt(digitalPinToInterrupt(encoderPinB), Counter_triggerB, CHANGE);
@@ -70,10 +70,6 @@ void setup() {
 
 void loop() 
 {
-
-  potent_value = analogRead(REF_PSignal_IN);
-
-  REF_position = map(potent_value, 0, 1023, 10000, -10000);
 
 
 
@@ -125,4 +121,24 @@ void Counter_triggerB()
 }
 
 ```
- 
+
+
+
+
+  I started the code with defineing the pins
+  I should include that my h-bridge has two inputs, when both inputs are HIGH or LOW, bridge does nothing, but if one of the input is HIGH and another one is LOW, motor is spins one way, change pins, the first one is now LOW and another one is now HIGH motor spins another way. For those who had not yet tasted the programing, HIGH means controller out put is high means its pin right now it giver max out put voltage, usualy 3.3v, for some controler it is 5v, HIGH and LOW can also be defines as 1 and 0.
+  ```cpp
+#define encoderPinA 15 //encoderA pin, (remeber our encoder is made out of two sensors)
+#define encoderPinB 14 //encoderB pin
+#define motorPinA 8 //my h bridge pin1
+#define motorPinB 9 //my h bridge pin2
+```
+
+
+
+These variables will hold value, boolean (true, or, false), C++ likes to declare global varibles at first so I have to tell C++ that this are my variables and they are going to hold booleans, basicaly this is simple declareation, in decleration line you can also add valeu to the variable.
+```cpp
+boolean A_set = false; //This boolean with tell me if current signal that is coming from encoder A is high or low, in later fucntion we will assighn value to A_set varible, true-if sensor  signalA is high, false if not
+boolean B_set = false; //Same thing here but for diffrent sensor on the encoder
+```
+
