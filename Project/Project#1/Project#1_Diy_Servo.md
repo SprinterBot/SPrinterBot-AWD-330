@@ -236,15 +236,15 @@ void Counter_triggerB()
 
 }
 ```
-_
-_
+-
+-
 Here we took this from first function which for example was called by interrupt,
 simple we ask controller (digitalRead will return wither HIGH or LOW) what is current pin signal is it high or low, see double equal sighn it asks wither digitalRead(encoderPinB) is qual to HIGH or not. If it is, set value to A_set true, if not, set value false. now we know something about the signal from pinA.
 ```cpp
 A_set = digitalRead(encoderPinB) == HIGH;
 ```
-_
-_
+-
+-
 Here this line identifies the direction of the motor, look closely at the picture. Question: When A_set is true, (sensorA signal is high) and B_set is true what is the direction, look at the pciture above, particulary on this picture what is the derection of encoder relatively to encoder strip?
 In this line (this is important) **from sensorA perspective, called by encoderA signal interrupt**, when A_set is not equale to B_set +1 to the encoder position that's why encoder_pos is '+=' but when A_set is equale to B_set we will subtract 1 from encoder_pos, therfore we can count steps based on the direction.
 ```cpp
@@ -258,9 +258,9 @@ Why? What Happend? Hint: refer to the picture aboce again, but not look from enc
  B_set = digitalRead(encoderPinB) == HIGH;// B    ___|````|__       ___|````|____|````  
   encoder_pos += (B_set == A_set) ? +1 : -1;//      |````|____|            |````|____|
 ```
-_
-_
-_
+-
+-
+-
 # Conclusion
 Basicaly this is a simple close to "servo" control program that has two inputs from encoder, evaluets them, calculates steps and then reflects error to output, controlling the motor and making error to equale to 0. It would worked smoothly if not Physics... Friction... Inertia... Force...
 This code was good to start with, like programming, dealing with interrupts, sensors, optical encoder, counters, h-bridge, but, the problem is that when controller see that motor is off, it will "push gas pedal on full" and eventualy overshooting the position, if controller realleases the gas pedal it doesn't mean motor stop will instantaniusly, my motor is from printer with big stator it has enough mass to spin couple times when it is off. Imagine cruse control in your car, if turn you turn it on and car computer will see that you are off my 1m/h to get to 60m/h it will acceleration motor to 7000rpm, and then when you just start to relise that something is wrong car reaches 61m/h in half a second it will push brakes on full trying to brake and "slooww down"??? Noooo... Maybe if you were first testor of first cruse control...of topic... One way or another, our code act just like this, there where PID control comes in.
