@@ -15,16 +15,16 @@
 
 ## Code
 
-Before I start I though it is good idea to go over the system of optical encoder, it is really inportant because you can control the accuracy of oprtical encoder, whole code is based on this.
-Here is the sketch of basic function of step signal comming from optical qudrature encoder.
+Before I started I thought it was a good idea to go over the system of the optical encoder, it is really important because you can control the accuracy of the optical encoder, the whole code is based on this.
+Here is the sketch of the basic function of the step signal coming from the optical quadrature encoder.
 ![image](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/fa994ce7-d969-4c55-b1f9-9ff525454684)
 ![image](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/08d2e32b-96eb-4e2d-8207-62ba59397c69)
-Let's say that we will tell our controller to count (late I will talk about defining the derection) the pulses from the encoder signal. We have 4 wires from the encoder, ground, power (my encoder can do 5v max input but controller can only work with 3.3 input voltage othewise I will burn it), and two signal wires, they will carry signal to controller.
+Let's say that we will tell our controller to count (later I will talk about defining the direction) the pulses from the encoder signal. We have 4 wires from the encoder, ground, power (my encoder can do 5v max input but the controller can only work with 3.3 input voltage otherwise I will burn it), and two signal wires, which will carry the signal to the controller.
 
 -
 -
 -
-Sorry this is my early code and I did not include many comments but I will go over it and my results. (scroll down for explnation)
+Sorry this is my early code and I did not include many comments. I will review this code and my results. (scroll down for an explanation)
 
 ```cpp
 
@@ -47,7 +47,7 @@ Defining variables to be used
 */
 
 
-volatile int old_encoder_pos = 0; // old encoder position, will be used to creat "new" encoder position
+volatile int old_encoder_pos = 0; // old encoder position, will be used to create a "new" encoder position
 volatile int encoder_pos = 0; //"current" encoder position
 volatile int REF_position = 10000;
 
@@ -77,7 +77,7 @@ void loop()
 
 
 
-  if (old_encoder_pos != encoder_pos){ //This code is responcible for printout ot the changing position count
+  if (old_encoder_pos != encoder_pos){ //This code is responsible for pinout of the changing position count
     Serial.print("Position in steps:");
     Serial.print(encoder_pos);
     Serial.println();
@@ -126,10 +126,10 @@ void Counter_triggerB()
 -
 -
 -
-I started the code with defineing the pins
-I should include that my h-bridge has two inputs, when both inputs are HIGH or LOW, bridge does nothing, but if one of the input is HIGH and another one is LOW, motor is spins one way, change pins, the first one is now LOW and another one is now HIGH motor spins another way. For those who had not yet tasted the programing, HIGH means controller out put is high means its pin right now it giver max out put voltage, usualy 3.3v, for some controler it is 5v, HIGH and LOW can also be defines as 1 and 0.
+I started the code by defining the pins.
+I should include that my h-bridge has two inputs, when both inputs are HIGH or LOW, the h-bridge does nothing, but if one of the inputs is HIGH and another one is LOW, the motor spins one way, changes pins, the first one is now LOW and another one is now HIGH motor spins another way. For those who have not yet tasted the programming, HIGH means the controller put is high means its pin right now gives max output voltage, usually 3.3v, for some controllers it is 5v, and HIGH and LOW can also be defined as 1 and 0.
   ```cpp
-#define encoderPinA 15 //encoderA pin, (remeber our encoder is made out of two sensors)
+#define encoderPinA 15 //encoderA pin, (remember our encoder is made out of two sensors)
 #define encoderPinB 14 //encoderB pin
 #define motorPinA 8 //my h bridge pin1
 #define motorPinB 9 //my h bridge pin2
@@ -137,26 +137,26 @@ I should include that my h-bridge has two inputs, when both inputs are HIGH or L
 -
 -
 -
-These variables will hold value, boolean (true, or, false), C++ likes to declare global varibles at first so I have to tell C++ that this are my variables and they are going to hold booleans, basicaly this is simple declareation, in decleration line you can also add valeu to the variable.
+These variables will hold value, boolean (true, or, false), C++ likes to declare global variables at first so I have to tell C++ that these are my variables and they are going to hold booleans. This is a simple declaration, declaration line you can also add value to the variable.
 ```cpp
-boolean A_set = false; //This boolean with tell me if current signal that is coming from encoder A is high or low, in later fucntion we will assighn value to A_set varible, true-if sensor  signalA is high, false if not
-boolean B_set = false; //Same thing here but for diffrent sensor on the encoder
+boolean A_set = false; //This boolean will tell me if a current signal that is coming from encoder A is high or low, later function we will assign value to A_set variable, true-if sensor  signalA is high, false if not
+boolean B_set = false; //Same thing here but for the different sensor on the encoder
 ```
 -
 -
 -
-Here we declare more variables, variable for encoder posistion, this variable will hold the posistion in steps from 0, so if you start moving the encoder it will start counting steps therfore we get a releative positiong, another varible called old_encoder_pos is just extra varible that will be used to update the serail output, later on this. Last one is important one, this varible will store the number stepp number the should be compared to step number of encoder varible and motor should move to position where live encoder posisition is equale to requested by user REF_posistion.
+Here we declare more variables, variable for the encoder position, variable will hold the position in steps from 0, so if you start moving the encoder it will start counting steps, therefore, we get a relative position, another variable called old_encoder_pos is just extra variable that will be used to update the serial output, later on, this. The last one is important, this variable will store the number step number that should be compared to the step number of the encoder variable and the motor should move to a position where the live encoder position is equal to that requested by user REF_posistion.
 ```cpp
-volatile int old_encoder_pos = 0; // old encoder position, will be used to creat "new" encoder position
+volatile int old_encoder_pos = 0; // old encoder position, will be used to create "new" encoder position
 volatile int encoder_pos = 0; //"current" encoder position
 volatile int REF_position = 10000;
 ```
 -
 -
 -
-Our first loop, from arduin IDE, this is called void setup loop, this loop is only run once at start, you can put anything there but it will be run only once. Usualy it is used to declare pin function like tell arduino or anyother controler if this pin is input or output?
+Our first loop, from Arduino IDE, is called the void setup loop, this loop is only run once at the start, you can put anything there but it will be run only once. Usually, it is used to declare pin functions like telling Arduino or any other controller if this pin is input or output.
 
-This is more interesting, this is special function that will interrupt any controller proccese when it see the change on specified pins, so if you having a fast moving encoder and you don't want counter function to miss the step and have inaccurate posistiong this function is very usufl, basicaly this line is activated when on specified pin it see change in signal,(falling + rising = change) this means than for each black line on the encoder you get two step signals!! you get twice as many steps from encoder and it seems to be, more accurate stepping.
+This is more interesting, this is a special function that will interrupt any controller process when it sees the change on specified pins, so if you have a fast-moving encoder and you don't want the counter function to miss the step and have an inaccurate positioning this function is very useful, basically this line is activated when on the specified pin it see a change in signal,(falling + rising = change) this means that for each black line on the encoder you get two-step signals!! you get twice as many steps from the encoder and it seems to be more accurate stepping.
 ```cpp
 void setup() {
   pinMode(encoderPinA, INPUT); //define these pins as inputs
@@ -177,9 +177,9 @@ void setup() {
 -
 -
 -
-Now,interesting stuff, controlling the motor itself, this is a real lopp, it will run until you turn off the controller, it will loop infinitely, running and updating your code.  The first if statment you see here compares the two varibles encoder and old_encoder, this was initialy made to reduce number of printed values going to serial because you may have already noticed there are no delays in this loop so controller will be running this couple thousand of times per second (depends on the work to do) you don want you serial to filled with many reapaeated positions. This function cleanes up your serial and updates it only when motor has changes its position. Also, impostnat note, the Serial.println(); is empty you may think it is usles, it plays a great role in organizing the serial print, it you remove it serial will print encoder values in line not in table.
+Now, interesting stuff, controlling the motor itself, this is a real loop, it will run until you turn off the controller, and it will loop infinitely, running and updating your code.  The first statement you see here compares the two variables encoder and old_encoder, this was initially made to reduce the number of printed values going to serial because you may have already noticed there are no delays in this loop so the controller will be running this couple thousand of times per second (depends on the work to do) you don want you serial to filled with many repeated positions. This function cleans up your serial and updates it only when the motor has changed its position. Also, an important note, the Serial.println(); is empty you may think it is usles, it plays a great role in organizing the serial print, if you remove it serial will print encoder values in line, not in table.
 
-The next if statment is basicaly motor controler, when it see the error (REF - encoder_pos) is negative it spins one way, if error value is positive, motor spin another way untill reaches the zero. 
+The next if statement is motor controller, when it sees the error (REF - encoder_pos) is negative it spins one way, if the error value is positive, the motor spins another way until reaches zero. 
 ```cpp
 void loop() 
 {
@@ -188,7 +188,7 @@ void loop()
 
 
 
-  if (old_encoder_pos != encoder_pos){ //This code is responcible for printout ot the changing position count
+  if (old_encoder_pos != encoder_pos){ //This code is responsible for pinout of the changing position count
     Serial.print("Position in steps:");
     Serial.print(encoder_pos);
     Serial.println();
@@ -218,8 +218,8 @@ void loop()
 -
 -
 -
-This is the heart of the counter, without this code nothing would have worked, this code is not truly by me, I used it from optical encoder example. I will have to go deeper over this. 
-So, when interrupt function that has been declared in void setup is activated input on that pin it will call the function, look at the names!
+This is the heart of the counter, without this code, nothing would have worked, this code is not truly by me, I used it from an optical encoder example. I will have to go deeper into this. 
+So, when the interrupt function that has been declared in void setup is activated input on that pin will call the function, look at the names!
 ```cpp
 void Counter_triggerA()
 {
@@ -238,22 +238,22 @@ void Counter_triggerB()
 ```
 -
 -
-Here we took this from first function which for example was called by interrupt,
-simple we ask controller (digitalRead will return wither HIGH or LOW) what is current pin signal is it high or low, see double equal sighn it asks wither digitalRead(encoderPinB) is qual to HIGH or not. If it is, set value to A_set true, if not, set value false. now we know something about the signal from pinA.
+Here we took this from the first function which for example was called by interrupt,
+we ask the controller (digitalRead will return whether HIGH or LOW) what is current pin signal is high or low, see double equal sign it asks whether digitalRead(encoderPinB) is equal to HIGH or not. If it is, set value to A_set true, if not, set value false. now we know something about the signal from pinA.
 ```cpp
 A_set = digitalRead(encoderPinB) == HIGH;
 ```
 -
 -
-Here this line identifies the direction of the motor, look closely at the picture. Question: When A_set is true, (sensorA signal is high) and B_set is true what is the direction, look at the pciture above, particulary on this picture what is the derection of encoder relatively to encoder strip?
-In this line (this is important) **from sensorA perspective, called by encoderA signal interrupt**, when A_set is not equale to B_set +1 to the encoder position that's why encoder_pos is '+=' but when A_set is equale to B_set we will subtract 1 from encoder_pos, therfore we can count steps based on the direction.
+Here this line identifies the direction of the motor, look closely at the picture. Question: When A_set is true, (sensorA signal is high) and B_set is true what is the direction, look at the picture above, particularly in this picture what is the direction of the encoder relative to the encoder strip?
+In this line (this is important) **from sensorA perspective, called by encoderA signal interrupt**, when A_set is not equal to B_set +1 to the encoder position that's why encoder_pos is '+=' but when A_set is equal to B_set we will subtract 1 from encoder_pos, therefore we can count steps based on the direction.
 ```cpp
 encoder_pos += (A_set != B_set) ? +1 : -1;
 ```
 Here is another problem for you to solve. 
-Here is another function which will be called by the interrup on encoderB or encoderB from sensorB. We check it state (HIGH or LOW)
-Then we are identifying the direction and based on it we subtract or add 1 to encoder_pos. See the difference? B_set == A_set?
-Why? What Happend? Hint: refer to the picture aboce again, but not look from encoderB perspective
+Here is another function that will be called by the interrupt on encoderB or encoderB from sensorB. We check its state (HIGH or LOW)
+Then we identify the direction and based on it we subtract or add 1 to encoder_pos. See the difference? B_set == A_set?
+Why? What Happened? Hint: refer to the picture above again, but do now look from the encoderB perspective
 ```cpp
  B_set = digitalRead(encoderPinB) == HIGH;// B    ___|````|__       ___|````|____|````  
   encoder_pos += (B_set == A_set) ? +1 : -1;//      |````|____|            |````|____|
@@ -262,7 +262,7 @@ Why? What Happend? Hint: refer to the picture aboce again, but not look from enc
 -
 -
 # Conclusion
-Basicaly this is a simple close to "servo" control program that has two inputs from encoder, evaluets them, calculates steps and then reflects error to output, controlling the motor and making error to equale to 0. It would worked smoothly if not Physics... Friction... Inertia... Force...
-This code was good to start with, like programming, dealing with interrupts, sensors, optical encoder, counters, h-bridge, but, the problem is that when controller see that motor is off, it will "push gas pedal on full" and eventualy overshooting the position, if controller realleases the gas pedal it doesn't mean motor stop will instantaniusly, my motor is from printer with big stator it has enough mass to spin couple times when it is off. Imagine cruse control in your car, if turn you turn it on and car computer will see that you are off my 1m/h to get to 60m/h it will acceleration motor to 7000rpm, and then when you just start to relise that something is wrong car reaches 61m/h in half a second it will push brakes on full trying to brake and "slooww down"??? Noooo... Maybe if you were first testor of first cruse control...of topic... One way or another, our code act just like this, there where PID control comes in.
-Basicaly my motor was moving back and forth but and never stopping, (sometimes it did but it was cause my "briliantly enggeneraing and 3d printer part that perfectly sits on the motor and keeps encoder perfectly straingth relatively to encoder" - Friction).
+Basically, this is a simple close-to "servo" control program that has two inputs from the encoder, evaluates them, calculates steps, and then reflects error to output, controlling the motor and making errors equal to 0. It would worked smoothly if not Physics... Friction... Inertia... Force...
+This code was good to start with, like programming, dealing with interrupts, sensors, optical encoder, counters, and h-bridge, but, the problem is that when the controller sees that the motor is off, it will "push the gas pedal on full" and eventually overshooting the position if controller releases the gas pedal it doesn't mean motor stop will instantaneously, my motor is from the printer with big stator it has enough mass to spin couple times when it is off. Imagine cruise control in your car, if you turn it on and the car computer will see that you are off by 1m/h to get to 60m/h it will accelerate the motor to 7000rpm, and then when you just start to realize that something is wrong car reaches 61m/h in half a second it will push brakes on full trying to brake and "slow down"??? No... Maybe if you were the first tester of the first cruise control...of topic... One way or another, our code acts just like this, that is where PID control comes in.
+My motor was moving back and forth but never stopping, (sometimes it did but it was caused by my "brilliantly engineering and 3D printer part that perfectly sits on the motor and keeps the encoder perfectly strong relative to the encoder" - Friction).
 Watch my (firstYoutubeVideo).
