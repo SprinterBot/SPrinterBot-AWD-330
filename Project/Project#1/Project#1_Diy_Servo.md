@@ -127,7 +127,10 @@ void Counter_triggerB()
 -
 -
 I started the code by defining the pins.
-I should include that my h-bridge has two inputs, when both inputs are HIGH or LOW, the h-bridge does nothing, but if one of the inputs is HIGH and another one is LOW, the motor spins one way, changes pins, the first one is now LOW and another one is now HIGH motor spins another way. For those who have not yet tasted the programming, HIGH means the controller put is high means its pin right now gives max output voltage, usually 3.3v, for some controllers it is 5v, and HIGH and LOW can also be defined as 1 and 0.
+I should include that my h-bridge has two inputs, when both inputs are HIGH or LOW, the h-bridge does nothing, but if one of the inputs is HIGH and another one is LOW, the motor spins one way, let's change pins, the first one is now LOW and another one is HIGH motor spins another way. For those who have not yet tasted the programming, HIGH means the controller output is high means its pin right now gives max output voltage, usually 3.3v, for some controllers it is 5v, and HIGH and LOW can also be defined as 1 and 0. 
+> [!NOTE]
+> #define (came from C programming language) we tell the controller that pin 15 is a value of our variable encoder pins.
+
   ```cpp
 #define encoderPinA 15 //encoderA pin, (remember our encoder is made out of two sensors)
 #define encoderPinB 14 //encoderB pin
@@ -137,7 +140,7 @@ I should include that my h-bridge has two inputs, when both inputs are HIGH or L
 -
 -
 -
-These variables will hold value, boolean (true, or, false), C++ likes to declare global variables at first so I have to tell C++ that these are my variables and they are going to hold booleans. This is a simple declaration, declaration line you can also add value to the variable.
+These variables will hold value, boolean (true, or, false), C++ likes to declare global variables at first so I have to tell C++ that these are my variables and they are going to hold booleans. This is a simple declaration, also in the declaration line you can also add value to the variable, without writing any extra code, otherwise it is a null - empty variable.
 ```cpp
 boolean A_set = false; //This boolean will tell me if a current signal that is coming from encoder A is high or low, later function we will assign value to A_set variable, true-if sensor  signalA is high, false if not
 boolean B_set = false; //Same thing here but for the different sensor on the encoder
@@ -145,7 +148,7 @@ boolean B_set = false; //Same thing here but for the different sensor on the enc
 -
 -
 -
-Here we declare more variables, variable for the encoder position, variable will hold the position in steps from 0, so if you start moving the encoder it will start counting steps, therefore, we get a relative position, another variable called old_encoder_pos is just extra variable that will be used to update the serial output, later on, this. The last one is important, this variable will store the number step number that should be compared to the step number of the encoder variable and the motor should move to a position where the live encoder position is equal to that requested by user REF_posistion.
+Here we declare more variables, variable for the encoder position, variable will hold the position in steps from 0, so if you start moving the encoder it will start counting steps, therefore, we get a relative position; another variable called old_encoder_pos is just extra variable that will be used to update the serial output. The last one (REF_position) is important, this variable will store the number of steps as a setpoint for the motor position. It will be compared to the live value from the encoder_pos variable and based on error we will control the direction of the motor to achieve the setpoint.
 ```cpp
 volatile int old_encoder_pos = 0; // old encoder position, will be used to create "new" encoder position
 volatile int encoder_pos = 0; //"current" encoder position
@@ -156,7 +159,7 @@ volatile int REF_position = 10000;
 -
 Our first loop, from Arduino IDE, is called the void setup loop, this loop is only run once at the start, you can put anything there but it will be run only once. Usually, it is used to declare pin functions like telling Arduino or any other controller if this pin is input or output.
 
-This is more interesting, this is a special function that will interrupt any controller process when it sees the change on specified pins, so if you have a fast-moving encoder and you don't want the counter function to miss the step and have an inaccurate positioning this function is very useful, basically this line is activated when on the specified pin it see a change in signal,(falling + rising = change) this means that for each black line on the encoder you get two-step signals!! you get twice as many steps from the encoder and it seems to be more accurate stepping.
+The next 2 lines are more interesting, these are special functions that will interrupt any controller process when it sees the change on specified pins, so if you have a fast-moving encoder and you don't want the counter function to miss the step and have an inaccurate positioning, this function is very useful, basically, this line is activated when on the specified pin it see a change in signal,(falling + rising = change) this means that for each black line on the encoder you get two-step signals!! you get twice as many steps from the encoder and it makes the system more accurate, I don't know the precision, but it is not recommended, just use two interrupts on RISING, but in this program we will use the full potential of the encoder, late we will change it to less accurate stepping for more stable control.
 ```cpp
 void setup() {
   pinMode(encoderPinA, INPUT); //define these pins as inputs
@@ -177,9 +180,9 @@ void setup() {
 -
 -
 -
-Now, interesting stuff, controlling the motor itself, this is a real loop, it will run until you turn off the controller, and it will loop infinitely, running and updating your code.  The first statement you see here compares the two variables encoder and old_encoder, this was initially made to reduce the number of printed values going to serial because you may have already noticed there are no delays in this loop so the controller will be running this couple thousand of times per second (depends on the work to do) you don want you serial to filled with many repeated positions. This function cleans up your serial and updates it only when the motor has changed its position. Also, an important note, the Serial.println(); is empty you may think it is usles, it plays a great role in organizing the serial print, if you remove it serial will print encoder values in line, not in table.
+Now controlling the motors this is a real loop, it will run until you turn off the controller, and it will loop infinitely, running and updating your code.  The first statement you see here compares the two variables encoder and old_encoder, this was initially made to reduce the number of printed values going to serial because you may have already noticed there are no delays in this loop so the controller will be running this couple thousand of times per second (depends on the work it doing) you don't want you serial to junk up with repeated positions. This function cleans up your serial and updates it only when the motor has changed its position. Also, an important note, the Serial.println(); plays a great role in organizing the serial print, if you remove it serial will print encoder values in line, not in the table.
 
-The next if statement is motor controller, when it sees the error (REF - encoder_pos) is negative it spins one way, if the error value is positive, the motor spins another way until reaches zero. 
+The next if statement is motor controller, when it sees the error=(REF - encoder_pos) is negative it spins one way, if the error value is positive, the motor spins another way until reaches zero. 
 ```cpp
 void loop() 
 {
