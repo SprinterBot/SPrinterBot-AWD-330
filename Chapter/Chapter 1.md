@@ -13,6 +13,9 @@ Motor (coil)
 
 4 Servo motors, one on each side of the printer to make it balanced, note there are no belts. Each motor will have a mount for an optical linear sensor that will tell the motor its relative position. This signal from the sensor will be sent to the custom controller drive like a micro Arduino, which will process and compare the position requested by the main controller board and the actual position of the motor, thus calculating error and processing it through the PID sub-program which will calculate Proportional Integral and Derivative Gain as output to H-Bridge using PWM signal thus controlling position and speed of the motor. In a future chapter, we will cover this more deeply.
 
+EDIT 1:
+Design of tubular motor now changed to flat linear motors due to properties of common magnet, will be explained later.
+
 
 ### How does the optical encoder work
 
