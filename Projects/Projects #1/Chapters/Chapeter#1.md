@@ -15,12 +15,6 @@
 
 ## Code
 
-Before I started I thought it was a good idea to go over the system of the optical encoder, it is really important because the whole code is based on this.
-Here is the sketch of the basic function of the step signal coming from the optical quadrature encoder.
-![image](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/fa994ce7-d969-4c55-b1f9-9ff525454684)
-![image](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/08d2e32b-96eb-4e2d-8207-62ba59397c69)
-Let's say that we will tell our controller to count (later I will talk about defining the direction) the pulses from the encoder signal. We have 4 wires from the encoder, ground, power (my encoder can do 5v max input but the controller can only work with 3.3 input voltage otherwise I will burn it), and two signal wires, which will carry the signal to the controller.
-
 -
 -
 -
