@@ -23,6 +23,7 @@ DC motor is one of the important things in servo motor, it converts electrical e
 
 (imag #1)![image 1](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/8abed3e1-969c-48a8-8909-d6f7291a4b20)
 
+
 ![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/b54d802b-f850-4a22-930c-5393a86d5ff8)
 
 
