@@ -31,16 +31,12 @@ DC motor is one of the important things in servo motor, it converts electrical e
 (image #3)![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/a77ea7ed-1de5-4293-9872-afaa70b6fde0)
 
 
-
-(image #4)![image 3](https://github.com/3DGuyExplorer/Quality-Speed-Printing-DIY-SERVOS-SprinterBot/assets/101147725/5d30c65c-2704-44c0-b790-761509a28f85)
-![Untitled](https://github.com/3DGuyExplorer/Quality-Speed-Printing-DIY-SERVOS-SprinterBot/assets/101147725/f27e2075-b0cd-46f6-b493-e43c0a30fcf5)
+(image #4)![Untitled-1](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/d5c66bf3-366f-4f6e-b25f-58f724e8d17e)
 
 
 
-(image #5)![image 4](https://github.com/3DGuyExplorer/Quality-Speed-Printing-DIY-SERVOS-SprinterBot/assets/101147725/e7d44aad-a858-4df5-b318-fb83bfd2b55b)
 
-
-In the first image, you can see the basic concept of a DC motor coil has a direct current flowing through it creating an electromagnetic field thus resulting in a directional force after all making the rotor spin. As you may know now magnetic field of a coil will have two poles based on the direction of the current flowing through it. In (image #4), the Right-hand rule can help us find the direction of the force in this situation, so the thumb stands for the direction of force, index direction of the current, and middle direction of the magnetic field (Magnetic field goes from the north pole to south pole). So in (image #1) the current flows clockwise over the could, and the magnetic field goes from the N magnet to the S Pole magnet, the right-hand rule tells us that in this situation  force will be directed downward where the N magnet and upward where is S magnet, creating a rotational force thus rotating the stator and anything that is connected...? But wait what if poles of the magnet match the poles of the coil? Your motor will be stalled and short-circuited (there is no more resistance therefore we let in too much current, which heats up the coil and burns). But this has been solved, (Image #1) just shows one pole while the actual, DC motor usually has 3 or more poles. Look at (Image #2). In (image #3) this is part of the motor called the rotor-it spins, it has 3 pole poles, and each of these poles has shared contacts-pads on the commutator where brushes from GND and Power+ contact it. When brushes touch two of the pads electrical current starts to flow through one of three poles thus as we've already learned, a rotational force moves the stator, but when the rotor moves more than 1/3 of a turn this pole loses contact with brushes and a new pole takes its place thus making another 1/3 of a turn, afterward losing contact as previous pole did and being replaced with our last 3rd pole which completes its turn and succeeding losses contact and new poles takes its place. The motor has completed the first cycle. This type of motor can spin forever until the brushes get all used up or lose power. This is the simplest DC brushed motor. 
+In the 3rd image, you can see the basic concept of a DC motor coil has a direct current flowing through it creating an electromagnetic field thus resulting in a directional force after all making the rotor spin. As you may know now magnetic field of a coil will have two poles based on the direction of the current flowing through it. In (image #4), the Right-hand rule can help us find the direction of the force in this situation, so the thumb stands for the direction of force, index direction of the current, and middle direction of the magnetic field (Magnetic field goes from the north pole to south pole). So in (image #3) the current flows clockwise over the could, and the magnetic field goes from the N magnet to the S Pole magnet, the right-hand rule tells us that in this situation  force will be directed downward where the N magnet and upward where is S magnet, creating a rotational force thus rotating the stator and anything that is connected...? But wait what if poles of the magnet match the poles of the coil? Your motor will be stalled and short-circuited (there is no more resistance therefore we let in too much current, which heats up the coil and burns). But this has been solved, (Image #1) just shows one pole while the actual, DC motor usually has 3 or more poles. Look at (Image #1). In (image #2) this is part of the motor called the rotor-it spins, it **usually** 3 pole poles, and each of these poles has shared contacts-pads on the commutator where brushes from GND and Power+ contact it. When brushes touch two of the pads electrical current starts to flow through one of three poles thus as we've already learned, a rotational force moves the stator, but when the rotor moves more than 1/3 of a turn this pole loses contact with brushes and a new pole takes its place thus making another 1/3 of a turn, afterward losing contact as previous pole did and being replaced with our last 3rd pole which completes its turn and succeeding losses contact and new poles takes its place. The motor has completed the first cycle. This type of motor can spin forever until the brushes get all used up or lose power. This is the simplest DC brushed motor. 
 
 This is by far one of the simplest examples, DC motor seems to be simple but it is far more complex, the interaction of the magnetic field with an electromagnetic field, the position of windings, type of coil, thickness, resistance, inductance, magnets, back EMF, friction, temperature, and many other things have crucial effect on the motor performance. 
 
@@ -49,7 +45,8 @@ portion is called flux) ...we get a rotational force, one side of the coil is pu
 
 **UPWARD**
 
-(image#5)![image](https://github.com/3DGuyExplorer/Quality-Speed-Printing-DIY-SERVOS-SprinterBot/assets/101147725/dcd1b432-4caa-442d-ab2d-4d6707af5167)
+(image#5)![image](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/f8a60269-c22c-4f5a-8a51-4a62332401e1)
+
 
 We built the first DC linear motor and it is not required to have brushes so basically DC brushless motor.
 
@@ -68,31 +65,43 @@ The encoder will work like an on/off switch every time a dark line passes in bet
 **How does the optical encoder work**
 
 The optical encoder requires two things: a strip - a long clear plastic strip with very dark lines spaced in micrometers, and an encoder - a plastic piece U-shaped between one of the halves that has infrared LED and the other half has two sensors that are spaced the way that they will give of two signals one shifted 90 degrees to another.
-![image](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/fa994ce7-d969-4c55-b1f9-9ff525454684)
-![image](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/08d2e32b-96eb-4e2d-8207-62ba59397c69)
+![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/fe858041-6624-4fa3-ace2-f5725b5e8fc8)
+(relative vs absolute optical position)
 
-When the plastic strip moves between two halves of the encoder, those dark lines are block and open the way for infrared light to reach each of the sensors on the opposite side. When it is blocked, sensor gives you 0, when there is a gap (clear space between lines) sensor will give you 1. If you graph it, x-time, y-signal from sensor, you will get a square wave, the faster you move the strip the thinner these squares(rectangles) be. For reference look at the picture below, a similar system, the circular encoder with gaps, infrared LED, and two sensors, each giving a square wave signal, you can see that the signal from one sensor is shifted 90 degrees relative to the signal from another sensor. This is very important, you need two sensors to be able to identify the direction of the motor signals that will shift 90 degrees one way or another based on the direction of the strip movement. Let's tell our controller to count the pulses from the encoder signal. We have 4 wires from the encoder, ground, power (my encoder can do 5v max input but the controller can only work with 3.3 input voltage otherwise I will burn it), and two signal wires, which will carry the signal to the controller. This way, out controller will count pulses and based on the direction this pulse will be represented as -1 or 1, and if we move encoder for 100 pulses one direction, controller will have a value of 100, if move encoder another direction but only 50 pulses, controller will have a value of 50. This way we can find position of encoder reletive to the starting point, it is only limited by the length of the encoder strip.
+
+![Untitled-1](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/22e805c6-6577-4869-8a15-230c08de71ad)
+
+
+When the plastic strip moves between two halves of the encoder, those dark lines block and open the way for infrared light to reach each of the sensors on the opposite side. When it is blocked, the sensor gives you 0, when there is a gap (clear space between lines) sensor will give you 1. If you graph it, x-time, y-signal from the sensor, you will get a square wave, the faster you move the strip the thinner these squares(rectangles) be. For reference look at the picture below, a similar system, the circular encoder with gaps, infrared LED, and two sensors, each giving a square wave signal, you can see that the signal from one sensor is shifted 90 degrees relative to the signal from another sensor. This is very important, you need two sensors to be able to identify the direction of the motor signals that will shift 90 degrees one way or another based on the direction of the strip movement. Let's tell our controller to count the pulses from the encoder signal. We have 4 wires from the encoder, ground, power (my encoder can do 5v max input but the controller can only work with 3.3 input voltage otherwise I will burn it), and two signal wires, which will carry the signal to the controller. This way, our controller will count pulses, and based on the direction this pulse will be represented as -1 or 1, if we move the encoder for 100 pulses in one direction, the controller will have a value of 100, if move the encoder another direction but only 50 pulses, the controller will have a value of 50. This way we can find the position of the encoder relative to the starting point, it is only limited by the length of the encoder strip.
 
 > [!NOTE]
 > 0 and 1 can be anything based on the type of the sensor, for example, an optical sensor from printing paper printers, the optical sensor will give you 0 or 3 volts based position of the strip.
 
 > [!NOTE]
-> Any driver controller should be fast enough to be able to "see" and respond quickly to the signal from the encoder. Imagine a 25-micron strip, at a speed of 1m/s, which means 40, 000 thousand lines per sec. Arduino controller are basicaly enough for this type of experiment but preferably get a faster controller like ESP32 like I did in later chapters.
+> Any driver controller should be fast enough to be able to "see" and respond quickly to the signal from the encoder. Imagine a 25-micron strip, at a speed of 1m/s, which means 40, 000 thousand lines per sec. Arduino controllers are basically enough for this type of experiment but preferably get a faster controller like ESP32 as I did in later chapters.
 
-![Untitled](https://github.com/studdev101/Quality-Speed-Printing-DIY-SERVOS-/assets/101147725/02a652e7-dcd0-4820-95ca-9e2b80e15df0)
+![image](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/d226c3d4-8963-4538-99ca-1be4575d5b59)
 
-![HEDS-9701-E50](https://github.com/studdev101/Quality-Speed-Printing-DIY-SERVOS-/assets/101147725/28544202-92c1-4b70-86b4-051d1f4af333)
+![image](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/6262fb07-97ce-4596-a492-8ca19e2df5aa)
+
 
 
 ### PWM (3/10)
 
-Basically, PWM is defined as Puls-Width-Modulation, if any of you played with pins on Raspberry Pi or played with Arduino you know that PWM is a signal that varies in signal widths, this signal can be used to control motors in our situation. We can control the speed of the motor by varying the signal width which is a square wave. If we are on 100% duty cycle we have a voltage of 5v then at 50% we have a voltage of 2.5. But PWM is generated directly from the controller that can't provide high enough current and voltage, in order to do that we need a transistor that will work like a switch for higher voltage and current; usually, it is a MOSFET transistor because they are more efficient (not going into details). One transistor will be able to control the speed of the motor but only in one direction, that is why we need a H-bridge. (4 transistors)
-![Pulse-Width-Modulation](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/a90e9b6f-9b72-450b-b77b-ce823ae5dca0)
+Basically, PWM is defined as Puls-Width-Modulation, if any of you played with pins on Raspberry Pi or played with Arduino you know that PWM is a signal that varies in signal widths, this signal can be used to control motors in our situation. We can control the speed of the motor by varying the signal width which is a square wave. If we are on a 100% duty cycle we have a voltage of 5v then at 50% we have a voltage of 2.5. But PWM is generated directly from the controller that can't provide high enough current and voltage, in order to do that we need a transistor that will work like a switch for higher voltage and current; usually, it is a MOSFET transistor because they are more efficient (not going into details). One transistor will be able to control the speed of the motor but only in one direction, that is why we need a H-bridge. (4 transistors
+
+![image](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/e6855b4f-a604-4194-9b2d-cd94afab69f2)
+
+
+![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/f9ff46bc-c2ee-44b1-b8f5-dd042d0663f2)
+
+
 
 ### H-Bridge (4/10)
 
 Basically, 4 transistors are positioned in a specific way that when two of them switch on the motor speen one way other transistors turn on the motor another way. This is the simplest form of this circuit. H-Bridge can be either used as one for the DC motor or it can also control the speed of the motor with PWM that comes from the main controller.
-![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/255eecd8-d82f-45b3-a428-7c39a204d528)
+![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/c5b341e6-635b-4220-bc0a-a7c592c25e85)
+
 
 ### Open loop control (no feedback) (5/10)
 
