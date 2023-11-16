@@ -90,7 +90,8 @@ When the plastic strip moves between two halves of the encoder, those dark lines
 
 Basically, PWM is defined as Puls-Width-Modulation, if any of you played with pins on Raspberry Pi or played with Arduino you know that PWM is a signal that varies in signal widths, this signal can be used to control motors in our situation. We can control the speed of the motor by varying the signal width which is a square wave. If we are on a 100% duty cycle we have a voltage of 5v then at 50% we have a voltage of 2.5. But PWM is generated directly from the controller that can't provide high enough current and voltage, in order to do that we need a transistor that will work like a switch for higher voltage and current; usually, it is a MOSFET transistor because they are more efficient (not going into details). One transistor will be able to control the speed of the motor but only in one direction, that is why we need a H-bridge. (4 transistors
 
-![image](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/e6855b4f-a604-4194-9b2d-cd94afab69f2)
+![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/17415588-b05b-4b99-89e7-27fdac115f35)
+
 
 
 ![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/f9ff46bc-c2ee-44b1-b8f5-dd042d0663f2)
@@ -99,7 +100,7 @@ Basically, PWM is defined as Puls-Width-Modulation, if any of you played with pi
 
 ### H-Bridge (4/10)
 
-Basically, 4 transistors are positioned in a specific way that when two of them switch on the motor speen one way other transistors turn on the motor another way. This is the simplest form of this circuit. H-Bridge can be either used as one for the DC motor or it can also control the speed of the motor with PWM that comes from the main controller.
+Basically, 4 transistors are positioned in a specific way: when two of them switch on the motor spins one way, and the other two transistors turn on the motor another way. This is the simplest form of this circuit. H-Bridge can be either used as one for the DC motor or it can also control the speed of the motor with PWM that comes from the main controller.
 ![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/c5b341e6-635b-4220-bc0a-a7c592c25e85)
 
 
@@ -111,16 +112,18 @@ Open loop control is where no feedback control is implemented, like an RC plane 
 
 
 ### Example of Open loop control (6/10)
- Stepper motor control does not require feedback, and most of 3D printing systems do not implement closed-loop control. Stepper motors are made in a specific way that one rotor turn is divided into small precise steps. When the controller requests the motor to move a specific number of steps stepper motor moves precisely this number of steps.
+ Stepper motor control does not require feedback, and most 3D printing systems do not implement closed-loop control. Stepper motors are made in a specific way that one rotor turn is divided into small precise steps. When the controller requests the motor to move a specific number of steps stepper motor moves precisely this number of steps.
 
- ![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/a24d762d-090a-436a-bd9a-d3a134a2f040)
+ ![open-loop-system](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/043b8e57-cedc-4e7d-b0aa-8a1464c157de)
+
 
 
 
 ### Closed loop control (feedback) (7/10)
 
-In this system for example temperature control. We have a heater cartridge that heats up the hotend, and we have a thermometer that gives its resistance data to the controller based on which the controller can calculate the actual temperature of the hotend and compare it to the requested temperature and correct the setting. But it is not easy just to fix, the controller needs to know how to fix, it for accurate and fast response Closed loop control usually implements P, PI, PD, or PID control. (Later on this)
-![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/567c294a-b6f3-4f82-925c-d04a2bba6f44)
+In this system for example temperature control. We have a heater cartridge that heats up the hotend, and we have a thermometer that gives its resistance data to the controller based on which the controller can calculate the actual temperature of the hotend and compare it to the requested temperature and correct the setting. But it is not easy to fix, the controller needs to know how to fix, it for accurate and fast response Closed loop control usually implements P, PI, PD, or PID control. (Later on this)
+![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/1f575163-b40c-490d-8a2b-8bc76fdfa760)
+
 
 ### PID Loop Control (8/10)
 
@@ -130,17 +133,25 @@ PID is the heart of controlling the servo motor, It is some sort of software tha
 #2:http://manuals.chudov.com/Servo-Tuning/Tuning-Servomotors.pdf
 #3:https://www.electronicdesign.com/markets/automation/article/21261678/neuronicworks-positioning-a-linear-servo-motor-with-a-pid-controller
 
-![uploads_0930a783-171c-4a58-8b8c-e39dbb645bac_ts1](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/9191c060-36bd-4bfb-afa6-5b6577d9d9cc)
+Check out this interactive PID contr: [ol](https://www.geogebra.org/m/tyd3f8dy)
 
-![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-Cross_gantry-330/assets/101147725/53478184-6559-47a0-8a57-577cf93f460d)
+![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/cce27701-6f65-47da-9db9-34616d81f913)
+
+
+![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/eee0f436-d3e4-4bc2-8d13-9ab456e95994)
+
 
 ### PID Tuning (9/10)
 
 This is a short section. This is one of the crucial things in servo control because without it the servo will be impossible to "control," when tuning PID you find values, and gains for each component of PID control, it is possible to find it using **auto PID tune** or manually, usually when servo motors are tuned professionally, they use auto PID tune and then fine-tuned to specific needs.
 
+![Untitled-1](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/3d4b2b7e-9b27-4527-b82a-af89d8f7956f)
+
 
 
 ### Servo Motor (10/10)
 
-There you go in theory we built a simple model of a servo motor, we got a DC motor that is being controlled by an H-bridge, and we have an encoder that will give us feedback, we got a controller with PID control that will control the DC motor. But to be able to build on our own in real-world 'real' servo we have to go over each of this things and understand them. But before we do this it is a good idea to begin with experiments and prototypes.
+There you go in theory we built a simple model of a servo motor, we got a DC motor that is being controlled by an H-bridge, and we have an encoder that will give us feedback, we got a controller with PID control that will control the DC motor. But to be able to build on our own in real-world 'real' servo we have to go over each of these things and understand them. But before we do this it is a good idea to begin with experiments and prototypes.
 In the next section, we are going to use a simple DC motor with an optical encoder, h-bridge, and controller, the goal is to make a working servo motor from these things, and that is a challenge, and those who are in DIY printer building and printing world like challenges >:>.
+![Untitled-1](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/75db0e01-b529-48af-9c25-373b29c99d07)
+
