@@ -21,7 +21,10 @@ To be able to understand this let's go over everything step by step.
 
 DC motor is one of the important things in servo motor, it converts electrical energy into mechanical energy, in our situation it will move the print head. As you might have known DC motors are made of permanent magnet stators and 3-pole winding rotors. Usually, this type of rotary motor has brushes.
 
-(imag #1)![image 1](https://github.com/3DGuyExplorer/Quality-Speed-Printing-DIY-SERVOS-SprinterBot/assets/101147725/8abed3e1-969c-48a8-8909-d6f7291a4b20)
+(imag #1)![image 1](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/8abed3e1-969c-48a8-8909-d6f7291a4b20)
+
+![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/b54d802b-f850-4a22-930c-5393a86d5ff8)
+
 
 (image #2)![image 2](https://github.com/3DGuyExplorer/Quality-Speed-Printing-DIY-SERVOS-SprinterBot/assets/101147725/56b6d6be-3e10-4862-bc40-9120db9aa9c8)
 (image #3)![Untitled](https://github.com/3DGuyExplorer/Quality-Speed-Printing-DIY-SERVOS-SprinterBot/assets/101147725/c084969e-d9ec-498e-bce4-c900192b5a1e)
