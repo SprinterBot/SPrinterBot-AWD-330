@@ -11,7 +11,7 @@ Final project idea. (Onenote basic sketches) It is a basic idea of a project. I 
 >UPDATE: The picture represents a sandwich-type linear DC motor, updated form tubular to sandwich, more in Project #2.
 
 
-Motor (coil)
+Motor
 ![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/d6803328-60d0-4f42-a5dd-867ede59bcd6)
 
 
