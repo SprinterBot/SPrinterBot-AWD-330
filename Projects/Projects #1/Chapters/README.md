@@ -80,7 +80,8 @@ When the plastic strip moves between two halves of the encoder, those dark lines
 > [!NOTE]
 > Any driver controller should be fast enough to be able to "see" and respond quickly to the signal from the encoder. Imagine a 25-micron strip, at a speed of 1m/s, which means 40, 000 thousand lines per sec. Arduino controllers are basically enough for this type of experiment but preferably get a faster controller like ESP32 as I did in later chapters.
 
-![image](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/d226c3d4-8963-4538-99ca-1be4575d5b59
+![image](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/d226c3d4-8963-4538-99ca-1be4575d5b59)
+
 ![image](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/6262fb07-97ce-4596-a492-8ca19e2df5aa)
 
 
