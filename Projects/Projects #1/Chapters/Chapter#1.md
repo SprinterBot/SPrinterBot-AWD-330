@@ -11,119 +11,28 @@
 - controller (recommended Arduino, or Pico, don't know about ESP32)
 - potentiometer (optional)
 - H-bridge
-- hot glue gun (you don't want stuff to be flying around)
+- hot glue gun (you don't want stuff to be flying around, paper tape is a good option too.)
 
 ## Code
 
 -
 -
 -
-Sorry this is my early code and I did not include many comments. I will review this code and my results. (scroll down for an explanation)
+Sorry this is my early code and I did not include many comments. Soon be fixed. This code is really easy you don't need past programming experience. It is okay if you don't understand this code, later, in chapter#2 I will simplify it.
 
-```cpp
+Note you can find the whole code in the code section.
 
-/*
-Defining pins, to be used as outputs or inputs
-*/
-
-#define encoderPinA 15
-#define encoderPinB 14
-#define motorPinA 10
-#define motorPinB 11
-
-
-
-boolean A_set = false;
-boolean B_set = false;
-
-/*
-Defining variables to be used
-*/
-
-
-volatile int old_encoder_pos = 0; // old encoder position, will be used to create a "new" encoder position
-volatile int encoder_pos = 0; //"current" encoder position
-volatile int REF_position = 10000;
-
-
-
-
-
-void setup() {
-  pinMode(encoderPinA, INPUT); //define these pins as inputs
-  pinMode(encoderPinB, INPUT); //same
-  pinMode(motorPinA, OUTPUT); //motor pin
-  pinMode(motorPinB, OUTPUT); //motor pin
-
-
-  attachInterrupt(digitalPinToInterrupt(encoderPinA), Counter_triggerA, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(encoderPinB), Counter_triggerB, CHANGE);
-
-  Serial.begin(300);
-  
-
-}
-
-void loop() 
-{
-
-
-
-
-
-  if (old_encoder_pos != encoder_pos){ //This code is responsible for pinout of the changing position count
-    Serial.print("Position in steps:");
-    Serial.print(encoder_pos);
-    Serial.println();
-    old_encoder_pos = encoder_pos;
-  }
-
-
-
-
-
-    if(encoder_pos > REF_position){
-      digitalWrite(motorPinA, HIGH);// Deactivate H bidge 
-      digitalWrite(motorPinB, HIGH);
-      digitalWrite(motorPinA, LOW);// CCW rotation
-      digitalWrite(motorPinB, HIGH);
-
-    }else if(encoder_pos < REF_position){
-      digitalWrite(motorPinA, HIGH);// Deactivate H bidge 
-      digitalWrite(motorPinB, HIGH);
-
-      digitalWrite(motorPinA, HIGH);// CW rotation
-      digitalWrite(motorPinB,LOW);
-    }
-
-}
-  
-
-
-
-
-void Counter_triggerA()
-{
-  A_set = digitalRead(encoderPinA) == HIGH; // A |````|____|            |````|____|      
-  encoder_pos += (A_set != B_set) ? +1 : -1;//  ___|````|__       ___|````|____|`````
-}
-
-// Interrupt on B changing state
-void Counter_triggerB() 
-{
-  B_set = digitalRead(encoderPinB) == HIGH;// B    ___|````|__       ___|````|____|````  
-  encoder_pos += (B_set == A_set) ? +1 : -1;//      |````|____|            |````|____|  
-
-}
-
-```
 -
 -
 -
+
+
+
 I started the code by defining the pins.
-I should include that my h-bridge has two inputs, when both inputs are HIGH or LOW, the h-bridge does nothing, but if one of the inputs is HIGH and another one is LOW, the motor spins one way, let's change pins, the first one is now LOW and another one is HIGH motor spins another way. For those who have not yet tasted the programming, HIGH means the controller output is high means its pin right now gives max output voltage, usually 3.3v, for some controllers it is 5v, and HIGH and LOW can also be defined as 1 and 0. 
+I should include that my h-bridge has two inputs, when both inputs are HIGH or LOW, the h-bridge does nothing, but if one of the inputs is HIGH and another one is LOW, the motor spins one way, let's change pins, the first one is now LOW and another one is HIGH motor spins another way. For those who have not yet tasted the programming, HIGH means the controller pin right now gives max output voltage, usually 3.3v, while LOW means nothing; for some controllers, it is 5v, and HIGH and LOW can also be defined as 1 and 0. 
+
 > [!NOTE]
-> #define (came from C programming language) we tell the controller that pin 15 is a value of our variable encoder pins.
+> #define (came from C programming language) We tell the controller that pin 15 is a value of our variable encoder pins.
 
   ```cpp
 #define encoderPinA 15 //encoderA pin, (remember our encoder is made out of two sensors)
@@ -134,7 +43,11 @@ I should include that my h-bridge has two inputs, when both inputs are HIGH or L
 -
 -
 -
-These variables will hold value, boolean (true, or, false), C++ likes to declare global variables at first so I have to tell C++ that these are my variables and they are going to hold booleans. This is a simple declaration, also in the declaration line you can also add value to the variable, without writing any extra code, otherwise it is a null - empty variable.
+
+
+
+These variables will hold value, boolean (true, or, false), C++ likes to declare global variables at first so I have to tell C++ that these are my variables and they are going to hold booleans. This is a simple declaration, also in the declaration line you can also assign value to the variable, without writing any extra code, otherwise it is a null-(empty variable).
+
 ```cpp
 boolean A_set = false; //This boolean will tell me if a current signal that is coming from encoder A is high or low, later function we will assign value to A_set variable, true-if sensor  signalA is high, false if not
 boolean B_set = false; //Same thing here but for the different sensor on the encoder
@@ -153,7 +66,7 @@ volatile int REF_position = 10000;
 -
 Our first loop, from Arduino IDE, is called the void setup loop, this loop is only run once at the start, you can put anything there but it will be run only once. Usually, it is used to declare pin functions like telling Arduino or any other controller if this pin is input or output.
 
-The next 2 lines are more interesting, these are special functions that will interrupt any controller process when it sees the change on specified pins, so if you have a fast-moving encoder and you don't want the counter function to miss the step and have an inaccurate positioning, this function is very useful, basically, this line is activated when on the specified pin it see a change in signal,(falling + rising = change) this means that for each black line on the encoder you get two-step signals!! you get twice as many steps from the encoder and it makes the system more accurate, I don't know the precision, but it is not recommended, just use two interrupts on RISING, but in this program we will use the full potential of the encoder, late we will change it to less accurate stepping for more stable control.
+The next 2 lines are more interesting, these are special functions that will interrupt any controller process when it sees the change on specified pins, so if you have a fast-moving encoder and you don't want the counter function to miss the step and have an inaccurate positioning, this function is very useful, basically, this line is activated when on the specified pin it see a change in signal,(falling + rising = change) this means that for each black line on the encoder you get two-step signals!! you get twice as many steps from the encoder and it makes the system more accurate, I don't know the precision, but it is not recommended, just use two interrupts on RISING, but in this program we will use the full potential of the encoder, later we will change it to less accurate stepping for more stable control.
 ```cpp
 void setup() {
   pinMode(encoderPinA, INPUT); //define these pins as inputs
@@ -174,7 +87,7 @@ void setup() {
 -
 -
 -
-Now controlling the motors this is a real loop, it will run until you turn off the controller, and it will loop infinitely, running and updating your code.  The first statement you see here compares the two variables encoder and old_encoder, this was initially made to reduce the number of printed values going to serial because you may have already noticed there are no delays in this loop so the controller will be running this couple thousand of times per second (depends on the work it doing) you don't want you serial to junk up with repeated positions. This function cleans up your serial and updates it only when the motor has changed its position. Also, an important note, the Serial.println(); plays a great role in organizing the serial print, if you remove it serial will print encoder values in line, not in the table.
+Now controlling the, this is a real loop, it will run until you turn off the controller, and it will loop infinitely, running and updating your code.  The first statement you see here compares the two variables encoder and old_encoder, this was initially made to reduce the number of printed values going to serial because you may have already noticed there are no delays in this loop so the controller will be running this couple thousand of times per second (depends on workload and the speed) you don't want you serial to junk up with repeated positions. This function cleans up your serial and updates it only when the motor has changed its position. Also, an important note, the Serial.println(); plays a great role in organizing the serial print, if you remove it serial will print encoder values in line, not in the table.
 
 The next if statement is motor controller, when it sees the error=(REF - encoder_pos) is negative it spins one way, if the error value is positive, the motor spins another way until reaches zero. 
 ```cpp
@@ -275,6 +188,6 @@ int potent_value; //new variable to freshly converted value from analog signal.
 -
 # Conclusion
 Basically, this is a simple close-to "servo" control program that has two inputs from the encoder, evaluates them, calculates steps, and then reflects error to output, controlling the motor and making errors equal to 0. It would worked smoothly if not Physics... Friction... Inertia... Force...
-This code was good to start with, like programming, dealing with interrupts, sensors, optical encoder, counters, and h-bridge, but, the problem is that when the controller sees that the motor is off, it will "push the gas pedal on full" and eventually overshooting the position if controller releases the gas pedal it doesn't mean motor stop will instantaneously, my motor is from the printer with big stator it has enough mass to spin couple times when it is off. Imagine cruise control in your car, if you turn it on and the car computer will see that you are off by 1m/h to get to 60m/h it will accelerate the motor to 7000rpm, and then when you just start to realize that something is wrong car reaches 61m/h in half a second it will push brakes on full trying to brake and "slow down"??? No... Maybe if you were the first tester of the first cruise control...of topic... One way or another, our code acts just like this, that is where PID control comes in.
-My motor was moving back and forth but never stopping, (sometimes it did but it was caused by my "brilliantly engineering and 3D printer part that perfectly sits on the motor and keeps the encoder perfectly strong relative to the encoder" - Friction).
-Watch my (firstYoutubeVideo).
+This code was good to start with, like programming and dealing with interrupts, sensors, optical encoder, counters, and h-bridge, but, the problem is that when the controller sees that the motor is off, it will "push the gas pedal on full" and eventually overshooting the position if controller releases the gas pedal it doesn't mean motor stop will instantaneously, my motor is from the printer with massive stator it has enough mass to spin couple times after being turned off. Imagine cruise control in your car, if you turn it on and the car computer will see that you are off by 1m/h to get to 60m/h it will accelerate the motor to 7000rpm, and then when you just start to realize that something is wrong car reaches 61m/h in half a second it will push brakes on full trying to brake and "slow down"??? No!... Maybe if you were the first tester of the first cruise control...of topic... One way or another, our code acts just like this (not like this... like a working cruise controller), that is where PID control comes in.
+My motor was moving back and forth but never stopping, (sometimes it did but it was caused by my "brilliantly engineering and 3D printer part that perfectly sits on the motor and keeps the encoder perfectly straight relative to the encoder" - Friction).
+
