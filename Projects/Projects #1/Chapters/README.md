@@ -1,4 +1,4 @@
-# Time to Lear!
+# Time to Learn!
 
 
 ## Let's build a miniature model of a servo motor with precision position feedback loop control.
