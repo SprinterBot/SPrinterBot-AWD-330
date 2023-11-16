@@ -1,4 +1,4 @@
-# Quality-Speed-Printing-DIY-SERVOS-SprinterBot
+# Speed Printing on DIY Linear Servos
 Experimental project to build a 3D printer called **SprinterBot** - Speed-Printer-Bot, with a DIY Linear DC Servo Motor. I want to introduce a new type of motor to the 3D printer community, which gives more speed and provides better high accuracy over conventional stepper motors, thus better print quality.
 
 Goal: 
