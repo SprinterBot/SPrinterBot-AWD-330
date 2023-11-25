@@ -1,11 +1,11 @@
 # Projects Overview
 This page...
 
-## Intoduction 
+## Introduction 
 Thoughts, Planning, possibilities, research.
 
 ## Project 1
 Learning about servo motor principals, and PID control.
 
 ## Projects 2 
-Based on out previouse project and reaserch on motor and PID control. We will trie to build our very first DIY linear servo.
+Based on out previous project and research on motor and PID control. We will try to build our very first DIY linear servo.
