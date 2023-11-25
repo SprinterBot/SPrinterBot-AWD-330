@@ -30,8 +30,9 @@ To achieve these goals it was considered that the current stepper motor and rela
 This is why building a low-cost linear & actuator servo (DC) motor is better and as a conventional DC motor, it is simpler in design and provides a good torque and speed ratio.
 You may think why linear motor? Linear motor has the advantage over conventional motors, removes the need for belts, have no more pullies, simpler design. Take a look at this article - https://www.machinedesign.com/automation-iiot/article/21836868/stepper-and-servo-motor-tradeoffs. 
 I'm not the first one who thought of a linear servo motor, and built them; some German manufacturers make specialized linear servo motors but they are not popular YET. (Most of them are BLC, not DC Motors) For example, a DIY linear servo Project - https://www.instructables.com/DIY-IRONLESS-LINEAR-SERVO-MOTOR/. 
-There is a company that introduced a beltless drive linear servo 3d printer as a commercial product, soon this should become a popular choice over bambulab printers. https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj5guuZq8aCAxUaPDQIHZLYApQQFnoECBQQAw&url=https%3A%2F%2Fwww.tomshardware.com%2Fnews%2F3d-printer-uses-magnets-to-break-speed-limits-print-at-a-table-shaking-800-mms&usg=AOvVaw3jq6ofTZzqNXgxktUmof64&opi=89978449
+There is a company that introduced a beltless drive linear servo 3d printer as a commercial product, soon this should become a popular choice over Bambulab printers. https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwj5guuZq8aCAxUaPDQIHZLYApQQFnoECBQQAw&url=https%3A%2F%2Fwww.tomshardware.com%2Fnews%2F3d-printer-uses-magnets-to-break-speed-limits-print-at-a-table-shaking-800-mms&usg=AOvVaw3jq6ofTZzqNXgxktUmof64&opi=89978449
 I welcome you to my exploration of motors, how they work, how servo works, what is PID control, and how it works. What and why cross gantry, power supplies, drivers, and many other stuff, I will not be getting too deep into engineering stuff.
+Simply, Linear servos are just cool!
 
 # Organization
 # Lisense
