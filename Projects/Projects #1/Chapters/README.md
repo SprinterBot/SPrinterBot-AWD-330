@@ -19,7 +19,7 @@ To be able to understand this let's go over everything step by step.
 
 ### DC Motor (1/10)
 
-DC motor is one of the important things in servo motor, it converts electrical energy into mechanical energy, in our situation it will move the print head. As you might have known DC motors are made of permanent magnet stators and 3-pole winding rotors. Usually, this type of rotary motor has brushes.
+DC motor is one of the important things in servo motor, it converts electrical energy into mechanical energy, that is being used to move some sort of mass, in our situation it will move the print head. As you might have known simplest DC motors are made of two permanent magnet-stators and 3-pole windin-rotors. Usually, this type of rotary motor has brushes.
 
 (imag #1)![Untitled](https://github.com/SprinterBot/SPrinterBot-AWD-330/assets/101147725/fa046804-ddf2-48c9-92bc-ffcdabd507b2)
 
